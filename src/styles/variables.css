@@ -1,0 +1,71 @@
+:root {
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Breakpoints (mobile-first) */
+  --bp-xs: 480px;
+  --bp-sm: 640px;
+  --bp-md: 760px;
+  --bp-lg: 900px;
+  --bp-xl: 980px;
+  --bp-2xl: 1180px;
+  --bp-wide: 1440px;
+
+  /* Spacing */
+  --gutter-xs: clamp(1rem, 4vw, 1.5rem);
+  --gutter: clamp(1.5rem, 5vw, 2.5rem);
+  --section-gap: clamp(3rem, 8vw, 6rem);
+
+  /* Typography */
+  --font-h1: clamp(2.5rem, 8vw, 5rem);
+  --font-h2: clamp(2rem, 6vw, 3.5rem);
+  --font-body: clamp(0.95rem, 2.5vw, 1.1rem);
+
+  /* Containers */
+  --container-max: clamp(1000px, 90vw, 1400px);
+  --container-max-wide: clamp(1200px, 85vw, 1600px);
+
+  --page-bg: #f7f2ea;
+  --surface: rgba(255, 255, 255, 0.7);
+  --surface-strong: rgba(255, 255, 255, 0.88);
+  --surface-border: rgba(39, 31, 23, 0.08);
+  --text-primary: #1e1a15;
+  --text-secondary: rgba(30, 26, 21, 0.72);
+  --accent: #ff6f3c;
+  --accent-alt: #1674ff;
+  --accent-soft: rgba(255, 111, 60, 0.12);
+  --shadow-soft: 0 20px 60px rgba(59, 37, 16, 0.12);
+  --shadow-card: 0 14px 32px rgba(37, 29, 24, 0.11);
+  --card-radius: clamp(20px, 4vw, 30px);
+  --card-radius-sm: clamp(16px, 3vw, 24px);
+  --heading-font: 'Space Grotesk', sans-serif;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --page-bg: #121212;
+  --surface: rgba(22, 22, 22, 0.72);
+  --surface-strong: rgba(20, 20, 20, 0.88);
+  --surface-border: rgba(255, 255, 255, 0.08);
+  --text-primary: #f8f2eb;
+  --text-secondary: rgba(248, 242, 235, 0.72);
+  --accent: #ffa56d;
+  --accent-alt: #7eb7ff;
+  --accent-soft: rgba(255, 165, 109, 0.14);
+  --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.28);
+  --shadow-card: 0 16px 44px rgba(0, 0, 0, 0.28);
+}
+
+/* Responsive media queries using vars */
+@supports (container-type: inline-size) {
+  @container (min-width: 40em) {
+    /* Custom container queries if needed */
+  }
+}
+

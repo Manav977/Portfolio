@@ -1,0 +1,60 @@
+.card {
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: 24px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-card);
+}
+
+.card h3 {
+  margin: 0 0 0.35rem;
+  font-family: var(--heading-font);
+}
+
+.card p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.form {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.form button {
+  padding: 0.85rem 1.1rem;
+  border-radius: 999px;
+  border: 0;
+  background: var(--text-primary);
+  color: var(--page-bg);
+  font-weight: 700;
+}
+
+.ghostBtn {
+  background: transparent !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--surface-border) !important;
+}
+
+.note {
+  flex-basis: 100%;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.message,
+.error {
+  margin: 0;
+}
+
+.message {
+  color: #1c8750;
+}
+
+.error {
+  color: #b73b17;
+}

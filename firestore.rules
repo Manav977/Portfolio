@@ -1,0 +1,105 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAllowedAdmin() {
+      return isSignedIn()
+        && request.auth.token.email in [
+          "manavnasra8080@gmail.com"
+        ];
+    }
+
+    function isValidAccent(accent) {
+      return accent in ['sun', 'sky', 'mint'];
+    }
+
+    function isValidProjectData(data) {
+      return data.keys().hasOnly([
+          'title',
+          'description',
+          'techStack',
+          'githubLink',
+          'liveLink',
+          'imageUrl',
+          'featured',
+          'accent',
+          'createdAt',
+          'updatedAt'
+        ])
+        && data.title is string
+        && data.title.size() > 0
+        && data.title.size() <= 120
+        && data.description is string
+        && data.description.size() > 0
+        && data.description.size() <= 2000
+        && data.techStack is list
+        && data.techStack.size() > 0
+        && data.techStack.size() <= 20
+        && data.githubLink is string
+        && data.githubLink.size() > 0
+        && data.githubLink.size() <= 500
+        && data.liveLink is string
+        && data.liveLink.size() > 0
+        && data.liveLink.size() <= 500
+        && data.imageUrl is string
+        && data.imageUrl.size() > 0
+        && data.imageUrl.size() <= 600000
+        && data.featured is bool
+        && data.accent is string
+        && isValidAccent(data.accent)
+        && data.createdAt is timestamp
+        && data.updatedAt is timestamp;
+    }
+
+    function isValidResumeData(data) {
+      return data.keys().hasOnly([
+          'resumeUrl',
+          'resumeName',
+          'updatedAt'
+        ])
+        && data.updatedAt is timestamp
+        && (
+          !('resumeUrl' in data)
+          || (
+            data.resumeUrl is string
+            && data.resumeUrl.size() > 0
+            && data.resumeUrl.size() <= 1200000
+          )
+        )
+        && (
+          !('resumeName' in data)
+          || (
+            data.resumeName is string
+            && data.resumeName.size() <= 255
+          )
+        );
+    }
+
+    match /projects/{projectId} {
+      allow read: if true;
+      allow create: if isAllowedAdmin()
+        && isValidProjectData(request.resource.data);
+
+      allow update: if isAllowedAdmin()
+        && isValidProjectData(request.resource.data);
+
+      allow delete: if isAllowedAdmin();
+    }
+
+    match /siteContent/resume {
+      allow read: if true;
+
+      allow create, update: if isAllowedAdmin()
+        && isValidResumeData(request.resource.data);
+
+      allow delete: if isAllowedAdmin();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

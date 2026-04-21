@@ -1,0 +1,49 @@
+.appShell {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(255, 124, 77, 0.12), transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(70, 149, 255, 0.15), transparent 50%),
+    radial-gradient(circle at 40% 100%, rgba(154, 224, 188, 0.1), transparent 50%),
+    var(--page-bg);
+  color: var(--text-primary);
+  transition:
+    background 220ms ease,
+    color 220ms ease;
+}
+
+.main {
+  max-width: var(--container-max-wide);
+  margin: 0 auto;
+  padding: var(--section-gap) 0 clamp(2rem, 5vw, 4rem);
+}
+
+.adminMain {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--gutter) 0 clamp(2rem, 5vw, 4rem);
+}
+
+.loadingState {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border-radius: var(--card-radius-sm);
+  background: var(--surface-strong);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-card);
+  margin: var(--gutter-xs) auto;
+  max-width: 500px;
+}
+
+/* Mobile-first: already good for small screens */
+@media (min-width: 760px) {
+  .main {
+    padding-top: clamp(6rem, 10vw, 8rem);
+  }
+}
+
+@media (min-width: 1180px) {
+  .main {
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+}
+
