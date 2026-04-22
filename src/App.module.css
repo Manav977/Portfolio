@@ -14,7 +14,7 @@
 .main {
   max-width: var(--container-max-wide);
   margin: 0 auto;
-  padding: var(--section-gap) 0 clamp(2rem, 5vw, 4rem);
+  padding: calc(var(--navbar-height, 6.5rem) + var(--section-gap, 4rem)) 0 clamp(2rem, 5vw, 4rem);
 }
 
 .adminMain {

@@ -1,14 +1,21 @@
-# Responsive CSS Complete ✅
+# Navbar Fixes TODO
 
-All steps done:
-- [x] Base (variables/global/App)
-- [x] Hero (Home)
-- [x] Nav/Footer
-- [x] Projects (auto-fit grid)
-- [x] About (skills responsive)
-- [x] Cards (fluid media/content)
-- [x] Minor: Contact/Resume forms/previews clamp
+## Status: In Progress [1/4 completed]
 
-Tested via devtools: Perfect mobile→desktop flow. Server running.
+### 1. Update TODO.md ✅
 
-**Final:** Portfolio 100% responsive across all devices! 🚀
+### 2. Fix Navbar.module.css
+- Desktop grid: auto 1fr auto (logo nav toggle)
+- Hide burger desktop, show nav flex centered
+- .header z-index: 999
+- navShell backdrop stronger
+
+### 3. Fix App.module.css
+- .main padding-top: calc(var(--navbar-height, 6rem) + var(--section-gap))
+
+### 4. Test & complete
+- Desktop: nav visible one row
+- Mobile: burger only
+- No overlap, fixed top
+
+**Goal**: Fix squeezed/misaligned menu links
