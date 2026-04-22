@@ -1,35 +1,35 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+
   build: {
-    rollupOptions: {
+    // ✅ New key (Vite 8)
+    rolldownOptions: {
       output: {
         manualChunks(id) {
           if (id.includes('node_modules/react')) {
-            return 'react-vendor';
+            return 'react-vendor'
           }
 
           if (id.includes('node_modules/firebase/auth')) {
-            return 'firebase-auth';
+            return 'firebase-auth'
           }
 
           if (id.includes('node_modules/firebase/firestore')) {
-            return 'firebase-firestore';
+            return 'firebase-firestore'
           }
 
           if (id.includes('node_modules/firebase/storage')) {
-            return 'firebase-storage';
+            return 'firebase-storage'
           }
 
           if (id.includes('node_modules/firebase')) {
-            return 'firebase-core';
+            return 'firebase-core'
           }
-
-          return undefined;
         }
       }
     }
   }
-});
+})
