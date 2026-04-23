@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { portfolioData } from '../../data/BotContent';
+import { portfolioData } from '../../data/BotContent.js';
 import styles from './ChatBot.module.css';
 
 const ChatBot = () => {
