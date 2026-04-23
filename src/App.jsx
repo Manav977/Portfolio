@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer';
 import PageTransition from './components/PageTransition/PageTransition';
 import { useTheme } from './hooks/useTheme';
 import styles from './App.module.css';
+import Chat from './components/Chat/ChatBot';
 
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
@@ -55,6 +56,7 @@ function App() {
           </Suspense>
         </PageTransition>
       </main>
+      <Chat/>
       {!isAdminRoute ? <Footer /> : null}
     </div>
   );
