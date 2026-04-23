@@ -1,6 +1,7 @@
 .about {
   display: grid;
   gap: var(--section-gap);
+  width: 100%;
 }
 
 .layout {
@@ -12,7 +13,7 @@
 .story {
   display: grid;
   gap: var(--gutter-xs);
-  padding: clamp(1.2rem, 4vw, 1.8rem);
+  padding: clamp(1.5rem, 4vw, 2rem);
   border-radius: var(--card-radius);
   background: var(--surface-strong);
   border: 1px solid var(--surface-border);
@@ -24,66 +25,123 @@
   margin: 0;
   color: var(--text-secondary);
   font-size: clamp(1rem, 2.5vw, 1.12rem);
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
 .skillField {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: clamp(1rem, 3vw, 1.4rem);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(1rem, 3vw, 1.5rem);
+  /* Footer se space maintain karne ke liye padding */
+  padding-bottom: 2rem; 
 }
 
 .skillCard {
+  position: relative;
   display: grid;
-  gap: clamp(0.6rem, 2vw, 0.8rem);
-  min-height: clamp(140px, 25vh, 180px);
-  padding: clamp(1rem, 3vw, 1.4rem);
+  gap: 0.8rem;
+  min-height: clamp(140px, 20vh, 180px);
+  padding: clamp(1.2rem, 3vw, 1.8rem);
   border-radius: var(--card-radius-sm);
-  background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.18), transparent),
-    var(--surface);
-  border: 1px solid var(--surface-border);
+  
+  /* DEFAULT STATE: Subtle Gradient and Border */
+  background: linear-gradient(
+    145deg, 
+    rgba(var(--card-accent-rgb, 255, 111, 60), 0.08), 
+    var(--surface)
+  );
+  border: 1px solid rgba(var(--card-accent-rgb, 255, 111, 60), 0.2);
+  
   box-shadow: var(--shadow-card);
-  transition: transform 200ms ease;
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+  cursor: default;
 }
 
+/* TOP BAR: Hamesha thodi si dikhegi (Kid Yatra feeling) */
+.skillCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--card-accent, var(--accent));
+  transform: scaleX(0.15);
+  transform-origin: left;
+  opacity: 0.4;
+  transition: transform 400ms ease, opacity 400ms ease;
+}
+
+/* HOVER EFFECT: Card Pops Out */
 .skillCard:hover {
-  transform: translateY(-4px);
+  transform: translateY(-12px) scale(1.03);
+  background: linear-gradient(
+    145deg, 
+    rgba(var(--card-accent-rgb, 255, 111, 60), 0.15), 
+    var(--surface-strong)
+  );
+  border-color: var(--card-accent, var(--accent));
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2), 
+              0 0 20px rgba(var(--card-accent-rgb, 255, 111, 60), 0.25);
 }
 
-.raise {
-  transform: translateY(-0.3rem) rotate(-0.5deg);
-}
-
-.lower {
-  transform: translateY(0.5rem) rotate(0.6deg);
+.skillCard:hover::before {
+  transform: scaleX(1);
+  opacity: 1;
 }
 
 .skillCard strong {
   font-family: var(--heading-font);
-  font-size: clamp(1rem, 3vw, 1.3rem);
-  line-height: 1.15;
+  font-size: clamp(1.1rem, 3vw, 1.35rem);
+  line-height: 1.2;
+  color: var(--text-primary);
+  transition: color 300ms ease, transform 300ms ease;
+}
+
+.skillCard:hover strong {
+  color: var(--card-accent, var(--accent));
+  transform: translateX(5px); /* Chota sa organic movement */
 }
 
 .skillCard span {
   color: var(--text-secondary);
-  font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  line-height: 1.5;
+  transition: color 300ms ease;
 }
 
-@media (min-width: 640px) {
+.skillCard:hover span {
+  color: var(--text-primary);
+}
+
+/* Offset Animations */
+.raise { transform: translateY(-0.5rem); }
+.lower { transform: translateY(0.5rem); }
+
+/* Responsive Layouts */
+@media (min-width: 768px) {
   .layout {
-    grid-template-columns: 0.8fr 1.2fr;
-  }
-
-  .skillField {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 3rem;
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1100px) {
   .about {
-    max-width: var(--container-max-wide);
+    max-width: 1200px;
     margin: 0 auto;
+    /* Extra padding for the footer gap issue */
+    padding-bottom: 80px; 
   }
 }
 
+/* Mobile Fix: Stack properly and remove tilt for better tap targets */
+@media (max-width: 640px) {
+  .raise, .lower {
+    transform: none;
+  }
+  .skillField {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,34 +1,39 @@
 .contact {
   display: grid;
   gap: var(--section-gap);
+  width: 100%;
+  padding: 0 1rem; /* Prevents content from touching screen edges on mobile */
 }
 
 .layout {
   display: grid;
   gap: var(--gutter);
   align-items: start;
-  max-width: var(--container-max);
+  /* Fixed width issues */
+  width: 100%;
+  max-width: 1200px; /* Increased from standard container sizes */
   margin: 0 auto;
 }
 
 .panel,
 .linksPanel {
-  padding: clamp(1.2rem, 4vw, 1.6rem);
+  padding: clamp(1.2rem, 5vw, 2.5rem); /* More generous padding */
   border-radius: var(--card-radius);
   background: var(--surface-strong);
   border: 1px solid var(--surface-border);
   backdrop-filter: blur(20px);
   box-shadow: var(--shadow-card);
+  width: 100%; /* Ensure panels fill the grid cell */
 }
 
 .form {
   display: grid;
-  gap: clamp(1rem, 3vw, 1.3rem);
+  gap: clamp(1.2rem, 3vw, 1.5rem);
 }
 
 .form label {
   display: grid;
-  gap: clamp(0.4rem, 1.5vw, 0.6rem);
+  gap: 0.6rem;
   color: var(--text-secondary);
   font-size: clamp(0.9rem, 2.5vw, 1rem);
 }
@@ -36,12 +41,13 @@
 .form input,
 .form textarea {
   width: 100%;
-  padding: clamp(0.85rem, 2.5vw, 1.1rem) clamp(0.9rem, 3vw, 1.3rem);
+  box-sizing: border-box; /* Crucial for width calculation */
+  padding: clamp(0.9rem, 2.5vw, 1.2rem);
   border-radius: var(--card-radius-sm);
   border: 1px solid var(--surface-border);
   background: rgba(255, 255, 255, 0.3);
   color: var(--text-primary);
-  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  font-size: clamp(1rem, 2vw, 1.1rem); /* Slightly larger for readability */
   transition: border-color 200ms ease, box-shadow 200ms ease;
 }
 
@@ -53,20 +59,23 @@
 }
 
 .form button {
-  width: fit-content;
-  padding: clamp(0.85rem, 2.5vw, 1.1rem) clamp(1rem, 3vw, 1.5rem);
+  width: 100%; /* Full width button looks better on mobile */
+  max-width: 300px; /* Limits size on laptop */
+  padding: 1.1rem 2rem;
   border: 0;
   border-radius: 999px;
   background: linear-gradient(135deg, var(--accent), #ff9368);
   color: #fff;
   font-weight: 700;
-  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
   box-shadow: 0 14px 32px rgba(255, 111, 60, 0.25);
-  transition: transform 200ms ease;
+  transition: transform 200ms ease, opacity 200ms;
+  cursor: pointer;
 }
 
 .form button:hover:not(:disabled) {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  filter: brightness(1.1);
 }
 
 .form button:disabled {
@@ -76,60 +85,71 @@
 
 .feedback {
   margin: var(--gutter-xs) 0 0;
-  padding: clamp(1rem, 3vw, 1.3rem);
+  padding: 1rem;
   border-radius: var(--card-radius-sm);
+  text-align: center;
 }
 
 .helpText {
-  margin: clamp(-0.2rem, -0.5vw, 0) 0 0;
-  font-size: clamp(0.8rem, 2vw, 0.9rem);
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
   color: var(--text-secondary);
 }
 
-.success {
-  color: #1c8750;
-}
-
-.error {
-  color: #b73b17;
-}
+.success { color: #1c8750; }
+.error { color: #b73b17; }
 
 .linksPanel {
   display: grid;
-  gap: clamp(1rem, 3vw, 1.4rem);
+  gap: clamp(1.2rem, 3vw, 1.8rem);
   align-content: start;
 }
 
 .linksPanel a {
-  width: fit-content;
+  width: max-content;
   position: relative;
   font-family: var(--heading-font);
-  font-size: clamp(1.1rem, 4vw, 1.6rem);
+  font-size: clamp(1.2rem, 4vw, 1.8rem); /* Slightly bigger links */
   font-weight: 600;
   letter-spacing: -0.01em;
-  padding: 0.3rem 0;
+  padding: 0.5rem 0;
+  text-decoration: none;
+  color: inherit;
 }
 
 .linksPanel a::after {
   content: '';
   position: absolute;
   left: 0;
-  bottom: -0.3rem;
+  bottom: 0;
   width: 100%;
   height: 2px;
   background: linear-gradient(90deg, var(--accent), var(--accent-alt));
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform 200ms ease;
+  transition: transform 300ms ease;
 }
 
 .linksPanel a:hover::after {
   transform: scaleX(1);
 }
 
-@media (min-width: 760px) {
+/* Tablet & Laptop Adjustments */
+@media (min-width: 768px) {
   .layout {
-    grid-template-columns: 1.15fr 0.85fr;
+    /* Form gets more space (1.4) than the Links (0.6) */
+    grid-template-columns: 1.4fr 0.6fr;
+    gap: 3rem;
+  }
+  
+  .form button {
+    width: fit-content; /* Returns to natural size on laptop */
   }
 }
 
+/* Wide Screen Adjustment */
+@media (min-width: 1400px) {
+    .layout {
+        max-width: 1350px;
+    }
+}
