@@ -96,12 +96,21 @@
 
 .inputArea input {
   flex: 1;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(var(--surface-rgb), 0.05); /* Optional: use RGB for better transparency */
   border: 1px solid var(--surface-border);
   padding: 0.7rem 1rem;
   border-radius: 999px;
-  color: white;
+  
+  /* YAHAN CHANGE HAI: Hardcoded white ki jagah variable use karein */
+  color: var(--text-primary); 
+  
   outline: none;
+}
+
+/* Taki typing ke waqt placeholder bhi sahi dikhe */
+.inputArea input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
 }
 
 .inputArea button {
